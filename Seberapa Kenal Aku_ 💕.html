@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seberapa Kenal Aku? 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg1:#fff0f3; --bg2:#ffd9e2; --card:rgba(255,255,255,.82); --ink:#4a1526; --muted:#9a5a6d;
+  --rose:#e8456b; --rose-d:#c92f55; --rose-l:#ffc2d1; --line:#f6c3d0;
+  --ok:#1f9d6a; --ok-bg:#dff7ec; --bad:#d6334f; --bad-bg:#ffe1e6; --free:#9a5bd6; --free-bg:#f0e5ff;
+  --shadow:0 18px 50px rgba(201,47,85,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg1:#2a0d18; --bg2:#4a1428; --card:rgba(60,20,36,.82); --ink:#ffe8ee; --muted:#e6a7b8;
+    --rose:#ff6b8f; --rose-d:#ff4a77; --rose-l:#7a2a45; --line:#7a3350;
+    --ok:#5fe0a8; --ok-bg:#12382a; --bad:#ff7a90; --bad-bg:#43161f; --free:#c9a0ff; --free-bg:#2e1a48;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#2a0d18; --bg2:#4a1428; --card:rgba(60,20,36,.82); --ink:#ffe8ee; --muted:#e6a7b8;
+  --rose:#ff6b8f; --rose-d:#ff4a77; --rose-l:#7a2a45; --line:#7a3350;
+  --ok:#5fe0a8; --ok-bg:#12382a; --bad:#ff7a90; --bad-bg:#43161f; --free:#c9a0ff; --free-bg:#2e1a48;
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;min-height:100%;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+  background:radial-gradient(1200px 700px at 15% -10%,var(--bg2),transparent 60%),
+              radial-gradient(900px 600px at 100% 100%,var(--bg2),transparent 55%),var(--bg1);
+  background-color:var(--bg1);overflow-x:hidden;
+}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-40px;color:var(--rose);opacity:.0;animation:floatUp linear infinite;user-select:none}
+@keyframes floatUp{
+  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0}
+  10%{opacity:.55}
+  90%{opacity:.25}
+  100%{transform:translateY(-115vh) translateX(40px) rotate(25deg);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.heart{animation:none;display:none}}
+
+main{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px 56px}
+.card{
+  width:100%;max-width:560px;background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:34px 28px;
+  animation:pop .5s ease both;
+}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.card.wide{max-width:760px}
+.center{text-align:center}
+.script{font-family:'Dancing Script',cursive;color:var(--rose);font-size:1.6rem;margin:0}
+h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,7vw,2.8rem);line-height:1.15;margin:.2em 0 .3em}
+h1 em{color:var(--rose);font-style:italic}
+h2{font-family:'Playfair Display',serif;font-size:1.45rem;line-height:1.35;margin:.4em 0 .8em}
+p{line-height:1.7;margin:.5em 0}
+.muted{color:var(--muted)}
+.big-heart{font-size:3.4rem;display:inline-block;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.big-heart{animation:none}}
+
+.btn{
+  appearance:none;border:0;cursor:pointer;font:inherit;font-weight:600;color:#fff;
+  background:linear-gradient(135deg,var(--rose),var(--rose-d));padding:14px 28px;border-radius:999px;
+  box-shadow:0 10px 24px rgba(232,69,107,.35);transition:transform .15s,box-shadow .15s,opacity .15s;
+  text-decoration:none;display:inline-block;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--rose-d);box-shadow:none;border:1.5px solid var(--rose)}
+.btn.small{padding:9px 16px;font-size:.85rem}
+.btn.green{background:linear-gradient(135deg,#2bb883,#1f9d6a);box-shadow:0 10px 24px rgba(31,157,106,.3)}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+
+.progress{height:8px;background:var(--rose-l);border-radius:99px;overflow:hidden;margin-bottom:6px}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),#ff9bb3);border-radius:99px;transition:width .5s ease}
+.pmeta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:10px}
+
+input[type=text],input[type=password],textarea{
+  width:100%;font:inherit;color:var(--ink);background:rgba(255,255,255,.6);border:1.5px solid var(--line);
+  border-radius:16px;padding:14px 16px;outline:none;transition:border .2s,box-shadow .2s;
+}
+:root[data-theme="dark"] input[type=text],:root[data-theme="dark"] input[type=password],:root[data-theme="dark"] textarea{background:rgba(0,0,0,.25)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) input[type=text],:root:not([data-theme="light"]) input[type=password],:root:not([data-theme="light"]) textarea{background:rgba(0,0,0,.25)}}
+input:focus,textarea:focus{border-color:var(--rose);box-shadow:0 0 0 4px rgba(232,69,107,.15)}
+textarea{min-height:140px;resize:vertical}
+.hint{font-size:.82rem;color:var(--muted);margin:8px 4px 0}
+.warn{color:var(--bad);font-size:.88rem;margin:8px 4px 0;min-height:1.3em}
+.counter{text-align:right;font-size:.78rem;color:var(--muted);margin-top:4px}
+
+.quote{font-family:'Playfair Display',serif;font-style:italic;color:var(--muted);margin-top:22px;font-size:.95rem}
+
+/* admin */
+.footer-admin{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom,0px));right:14px;z-index:5}
+.footer-admin button{background:none;border:0;color:var(--muted);opacity:.55;font:inherit;font-size:.78rem;cursor:pointer;padding:6px 10px}
+.footer-admin button:hover{opacity:1}
+.score-box{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--rose),var(--rose-d));color:#fff;border-radius:22px;padding:18px 22px;margin:14px 0 18px}
+.score-box .num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1}
+.score-box small{opacity:.9;display:block}
+.qitem{border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:12px;background:rgba(255,255,255,.35)}
+:root[data-theme="dark"] .qitem{background:rgba(0,0,0,.18)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .qitem{background:rgba(0,0,0,.18)}}
+.qitem .q{font-weight:600;font-size:.92rem;margin:0 0 8px}
+.qitem .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:8px 0 2px}
+.qitem .ans{margin:0;white-space:pre-wrap;word-break:break-word;font-size:.95rem}
+.badge{display:inline-block;font-size:.76rem;font-weight:600;border-radius:99px;padding:3px 12px;margin-left:8px;vertical-align:middle}
+.badge.ok{background:var(--ok-bg);color:var(--ok)}
+.badge.bad{background:var(--bad-bg);color:var(--bad)}
+.badge.free{background:var(--free-bg);color:var(--free)}
+.qhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.codebox{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;min-height:90px}
+.theme-toggle{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:14px;z-index:5;background:var(--card);border:1px solid var(--line);border-radius:99px;width:40px;height:40px;cursor:pointer;font-size:1rem}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div id="hearts" aria-hidden="true"></div>
+<button class="theme-toggle" id="themeBtn" aria-label="Ganti tema">🌙</button>
+<main><div id="app" style="width:100%;display:flex;justify-content:center"></div></main>
+<div class="footer-admin"><button id="adminBtn">🔒 admin</button></div>
+
+<script>
+/* =====================  PENGATURAN  ===================== */
+var ADMIN_PIN = "admin123";          // <-- ganti PIN admin di sini
+var PARTNER_NAME = "Dafi";           // nama yang muncul di sapaan
+var ADMIN_WA = "";                    // opsional: nomor WA kamu format 628xxxxxxxxxx (agar tombol kirim langsung ke kamu)
+
+var QUESTIONS = [
+  {q:"Aku suka makan apa?", correct:"Nasi goreng dan pisang goreng", hint:"Sebutkan dua-duanya ya 😋", type:"food"},
+  {q:"Kapan tanggal lahir aku?", correct:"5 Desember 2009", hint:"Contoh penulisan: 5 Desember 2009", type:"date", d:5,m:12,y:2009},
+  {q:"Cewe aku?", correct:"Naila Husna Hidayat", hint:"Tulis nama lengkapnya 💗", type:"name"},
+  {q:"Aku paling ga suka apa?", correct:"Belajar", hint:"Hehe, tebak yang paling jujur", type:"learn"},
+  {q:"Aku paling suka apa?", correct:"Makan", hint:"Yang ini pasti gampang 🍽️", type:"eat"},
+  {q:"Kapan kita fotobox bareng?", correct:"29 Agustus 2026", hint:"Contoh penulisan: 29 Agustus 2026", type:"date", d:29,m:8,y:2026},
+  {q:"Apa yang lu ga suka dari gua?", correct:"(Jawaban bebas, tapi wajib dijelaskan)", hint:"Jujur ya. Tidak boleh jawab 'tidak ada'. Jelaskan alasannya baru bisa selesai 🥺", type:"free"}
+];
+
+/* =====================  PENILAIAN  ===================== */
+var MONTHS = {januari:1,jan:1,februari:2,feb:2,pebruari:2,maret:3,mar:3,april:4,apr:4,mei:5,juni:6,jun:6,juli:7,jul:7,agustus:8,agu:8,agt:8,agst:8,aug:8,august:8,september:9,sep:9,sept:9,oktober:10,okt:10,oct:10,november:11,nov:11,nop:11,desember:12,des:12,dec:12,december:12};
+function norm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9\s\/\-\.]/g," ").replace(/\s+/g," ").trim();}
+function parseDate(s){
+  s = norm(s); var day=null,mon=null,yr=null;
+  var words = s.split(/[\s\/\-\.]+/).filter(Boolean);
+  words.forEach(function(w){ if(MONTHS[w]) mon = MONTHS[w]; });
+  var nums = (s.match(/\d+/g)||[]).map(Number);
+  if(mon){
+    nums.forEach(function(n){ if(n>=1000) yr=n; else if(n<=31 && day===null) day=n; });
+  } else if(nums.length>=3){ day=nums[0]; mon=nums[1]; yr=nums[2]; if(yr<100) yr+=2000; }
+  return {d:day,m:mon,y:yr};
+}
+function grade(i, ans){
+  var q = QUESTIONS[i], a = norm(ans);
+  if(q.type==="free") return null; // jawaban bebas
+  if(q.type==="food") return /nasi\s*goreng|nasgor/.test(a) && /pisang\s*goreng|pisgor/.test(a);
+  if(q.type==="date"){ var p=parseDate(ans); return p.d===q.d && p.m===q.m && p.y===q.y; }
+  if(q.type==="name") return /naila/.test(a);
+  if(q.type==="learn") return /belajar/.test(a);
+  if(q.type==="eat") return /^(makan|makanan|ngemil|mkn)\b|\bmakan\b/.test(a) && !/belajar/.test(a);
+  return false;
+}
+var BLOCKED_FREE = /^(tidak|ga|gak|nggak|ngga|enggak|engga|tdk|g)\s*(ada|punya)\b|^gada\b|^nothing\b|^no\b|^none\b|^-+$|^tidak$|^ga$|^gak$/;
+function validateFree(text){
+  var t = text.trim(), n = norm(t);
+  if(!t) return "Kolom ini tidak boleh kosong ya 🥺";
+  if(BLOCKED_FREE.test(n)) return "Hmm, jawaban 'tidak ada' tidak diterima ya 😤 Pasti ada satu hal kecil yang bisa kamu sebutin.";
+  var words = t.split(/\s+/).filter(Boolean).length;
+  if(t.length < 40 || words < 8) return "Jelaskan lebih lengkap dong, minimal 8 kata dan sertakan alasannya ya 💬 (" + words + "/8 kata)";
+  if(!/(karena|soalnya|sebab|gara|biar|habis|tiap|setiap|kalau|kalo|suka|bikin|jadi|sering)/.test(n)) return "Coba tambahkan alasannya juga ya (misalnya pakai kata 'karena' atau 'soalnya') ✍️";
+  return "";
+}
+
+/* =====================  UTIL  ===================== */
+function h(tag, attrs, kids){
+  var e=document.createElement(tag);
+  if(attrs) Object.keys(attrs).forEach(function(k){
+    if(k==="class") e.className=attrs[k];
+    else if(k==="text") e.textContent=attrs[k];
+    else if(k.slice(0,2)==="on") e.addEventListener(k.slice(2),attrs[k]);
+    else e.setAttribute(k,attrs[k]);
+  });
+  (kids||[]).forEach(function(c){ if(c==null) return; e.appendChild(typeof c==="string"?document.createTextNode(c):c); });
+  return e;
+}
+function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); if(v===null) localStorage.removeItem(k); else localStorage.setItem(k,v);}catch(e){return null;} }
+function encode(obj){ return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }
+function decode(str){ return JSON.parse(decodeURIComponent(escape(atob(str.replace(/\s+/g,""))))); }
+function copyText(text, done){
+  function fallback(){ var t=h("textarea",{style:"position:fixed;opacity:0"}); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand("copy");}catch(e){} t.remove(); done&&done(); }
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){done&&done();},fallback); } else fallback(); }catch(e){fallback();}
+}
+var app = document.getElementById("app");
+function show(node){ app.innerHTML=""; app.appendChild(node); window.scrollTo(0,0); }
+
+/* hati melayang */
+(function(){
+  var box=document.getElementById("hearts"), sym=["♥","❤","♡","💗","💕"];
+  for(var i=0;i<18;i++){
+    var s=h("span",{class:"heart",text:sym[i%sym.length]});
+    s.style.left=(Math.random()*100)+"%";
+    s.style.fontSize=(14+Math.random()*26)+"px";
+    s.style.animationDuration=(9+Math.random()*12)+"s";
+    s.style.animationDelay=(-Math.random()*20)+"s";
+    box.appendChild(s);
+  }
+})();
+
+/* tema */
+(function(){
+  var btn=document.getElementById("themeBtn"), root=document.documentElement;
+  var saved=store("theme"); if(saved) root.setAttribute("data-theme",saved);
+  function isDark(){ var t=root.getAttribute("data-theme"); return t? t==="dark" : window.matchMedia("(prefers-color-scheme: dark)").matches; }
+  function paint(){ btn.textContent=isDark()?"☀️":"🌙"; }
+  btn.addEventListener("click",function(){ var n=isDark()?"light":"dark"; root.setAttribute("data-theme",n); store("theme",n); paint(); });
+  paint();
+})();
+
+/* =====================  LAYAR PASANGAN  ===================== */
+var answers = [], cur = 0, playerName = "";
+
+function screenIntro(){
+  answers=[]; cur=0; playerName="";
+  show(h("div",{class:"card center"},[
+    h("div",{class:"big-heart",text:"💖"}),
+    h("p",{class:"script",text:"Untuk "+PARTNER_NAME+", sayangku"}),
+    h("h1",{},["Seberapa ",h("em",{text:"Kenal"})," Aku?"]),
+    h("p",{class:"muted",text:"Ada 7 pertanyaan kecil dariku. Jawab dengan jujur dan dari hati ya. Jangan nyontek, hehe 🤭"}),
+    h("div",{class:"row"},[ h("button",{class:"btn",text:"Mulai Quiz 💌",onclick:function(){ screenName(); }}) ]),
+    h("p",{class:"quote",text:"“Cinta bukan hanya soal saling memandang, tapi juga soal saling mengenal.”"})
+  ]));
+}
+
+function screenName(){
+  var input=h("input",{type:"text",placeholder:"Tulis namamu di sini...",autocomplete:"off",maxlength:"40"});
+  input.value=playerName||"";
+  var warn=h("p",{class:"warn"});
+  input.addEventListener("input",function(){ warn.textContent=""; });
+  function go(){
+    var v=input.value.trim().replace(/\s+/g," ");
+    if(v.length<2){ warn.textContent="Isi namamu dulu ya sebelum mulai 🥺"; return; }
+    playerName=v; cur=0; screenQuestion();
+  }
+  input.addEventListener("keydown",function(e){ if(e.key==="Enter") go(); });
+  show(h("div",{class:"card center"},[
+    h("div",{class:"big-heart",text:"💌"}),
+    h("p",{class:"script",text:"Sebelum mulai..."}),
+    h("h2",{text:"Siapa nama kamu, sayang?"}),
+    h("p",{class:"muted",text:"Tulis namamu dulu ya, supaya jawabanmu tercatat atas namamu 💕"}),
+    input,warn,
+    h("div",{class:"row"},[
+      h("button",{class:"btn ghost",text:"← Kembali",onclick:screenIntro}),
+      h("button",{class:"btn",text:"Lanjut ke Pertanyaan 💗",onclick:go})
+    ])
+  ]));
+  input.focus({preventScroll:true});
+}
+
+function screenQuestion(){
+  var q=QUESTIONS[cur], isFree=q.type==="free";
+  var input = isFree
+    ? h("textarea",{id:"ans",placeholder:"Tulis jawabanmu dan jelaskan alasannya di sini...",maxlength:"600"})
+    : h("input",{id:"ans",type:"text",placeholder:"Ketik jawabanmu di sini...",autocomplete:"off",maxlength:"120"});
+  var warn=h("p",{class:"warn",id:"warn"});
+  var counter=isFree?h("div",{class:"counter",id:"cnt",text:"0 kata"}):null;
+  var next=h("button",{class:"btn",text:cur===QUESTIONS.length-1?"Selesai 💘":"Lanjut 💕"});
+  var back=cur>0?h("button",{class:"btn ghost",text:"← Kembali",onclick:function(){ answers[cur]=input.value; cur--; screenQuestion(); }}):null;
+  input.value=answers[cur]||"";
+  if(isFree) input.addEventListener("input",function(){ var w=input.value.trim().split(/\s+/).filter(Boolean).length; counter.textContent=w+" kata"; warn.textContent=""; });
+  else input.addEventListener("input",function(){ warn.textContent=""; });
+
+  function submit(){
+    var v=input.value.trim();
+    if(!v){ warn.textContent="Jawab dulu ya sayang 🥺"; return; }
+    if(isFree){ var m=validateFree(v); if(m){ warn.textContent=m; return; } }
+    answers[cur]=v;
+    if(cur<QUESTIONS.length-1){ cur++; screenQuestion(); } else finish();
+  }
+  next.addEventListener("click",submit);
+  if(!isFree) input.addEventListener("keydown",function(e){ if(e.key==="Enter") submit(); });
+
+  var pct=(cur/QUESTIONS.length)*100;
+  var bar=h("i"); 
+  show(h("div",{class:"card"},[
+    h("div",{class:"pmeta"},[h("span",{text:"Pertanyaan "+(cur+1)+" dari "+QUESTIONS.length}),h("span",{text:"💗"})]),
+    h("div",{class:"progress"},[bar]),
+    h("p",{class:"script",text:"Pertanyaan #"+(cur+1)}),
+    h("h2",{text:q.q}),
+    input, counter, h("p",{class:"hint",text:q.hint}), warn,
+    h("div",{class:"row",style:"justify-content:space-between"},[back||h("span"),next])
+  ]));
+  setTimeout(function(){ bar.style.width=((cur+1)/QUESTIONS.length*100)+"%"; },30);
+  input.focus({preventScroll:true});
+}
+
+function finish(){
+  var payload={n:playerName||PARTNER_NAME,t:new Date().toISOString(),a:answers.slice()};
+  var code=encode(payload);
+  store("result",code);
+  var waText="Jawaban quiz 'Seberapa Kenal Aku' 💌\nKode jawaban:\n"+code;
+  var waUrl="https://wa.me/"+(ADMIN_WA||"")+"?text="+encodeURIComponent(waText);
+  var copyBtn=h("button",{class:"btn ghost",text:"📋 Salin kode jawaban"});
+  copyBtn.addEventListener("click",function(){ copyText(code,function(){ copyBtn.textContent="✅ Tersalin!"; }); });
+  show(h("div",{class:"card center"},[
+    h("div",{class:"big-heart",text:"🥰"}),
+    h("p",{class:"script",text:"Terima kasih, "+(playerName||PARTNER_NAME)}),
+    h("h1",{},["Jawabanmu ",h("em",{text:"Tersimpan"})]),
+    h("p",{class:"muted",text:"Makasih sudah menjawab semuanya dengan jujur. Satu langkah terakhir: kirim jawabanmu ke aku supaya bisa kulihat hasilnya ya 💌"}),
+    h("div",{class:"row"},[
+      h("a",{class:"btn green",href:waUrl,target:"_blank",rel:"noopener",text:"💬 Kirim lewat WhatsApp"}),
+      copyBtn
+    ]),
+    h("p",{class:"hint",text:"Kalau tombol WhatsApp tidak terbuka, salin kodenya lalu kirim manual ke aku."}),
+    h("p",{class:"quote",text:"“Apapun jawabanmu, kamu tetap orang yang paling aku sayang.”"})
+  ]));
+}
+
+/* =====================  ADMIN  ===================== */
+function screenAdminLogin(){
+  var pin=h("input",{type:"password",placeholder:"Masukkan PIN admin",autocomplete:"off"});
+  var warn=h("p",{class:"warn"});
+  function go(){ if(pin.value===ADMIN_PIN) screenAdmin(); else { warn.textContent="PIN salah 🙈"; } }
+  pin.addEventListener("keydown",function(e){ if(e.key==="Enter") go(); });
+  show(h("div",{class:"card center"},[
+    h("div",{class:"big-heart",text:"🔐"}),
+    h("h2",{text:"Area Admin"}),
+    h("p",{class:"muted",text:"Khusus untuk mengecek jawaban dan skor."}),
+    pin,warn,
+    h("div",{class:"row"},[
+      h("button",{class:"btn",text:"Masuk",onclick:go}),
+      h("button",{class:"btn ghost",text:"Kembali",onclick:screenIntro})
+    ])
+  ]));
+  pin.focus({preventScroll:true});
+}
+
+function screenAdmin(initialCode){
+  var codeBox=h("textarea",{class:"codebox",placeholder:"Tempel kode jawaban dari pasanganmu di sini..."});
+  var result=h("div");
+  var warn=h("p",{class:"warn"});
+  var data=null, overrides={};
+
+  function load(code){
+    warn.textContent="";
+    try{
+      var c=code.trim(); var m=c.match(/[A-Za-z0-9+\/=]{40,}/g);
+      if(m) c=m[m.length-1];
+      data=decode(c);
+      if(!data||!Array.isArray(data.a)) throw 0;
+      overrides={}; render();
+    }catch(e){ data=null; result.innerHTML=""; warn.textContent="Kode tidak valid. Pastikan disalin utuh ya."; }
+  }
+
+  function render(){
+    result.innerHTML="";
+    var autoFlags=QUESTIONS.map(function(q,i){ return grade(i,data.a[i]||""); });
+    var finalFlags=autoFlags.map(function(f,i){ return overrides.hasOwnProperty(i)?overrides[i]:f; });
+    var score=finalFlags.filter(function(f){return f===true;}).length;
+    var total=QUESTIONS.filter(function(q){return q.type!=="free";}).length;
+    var when=""; try{ when=new Date(data.t).toLocaleString("id-ID",{dateStyle:"long",timeStyle:"short"}); }catch(e){}
+
+    result.appendChild(h("div",{class:"score-box"},[
+      h("div",{class:"num",text:score+"/"+total}),
+      h("div",{},[ h("strong",{text:"Skor "+(data.n||"Pasangan")}), h("small",{text:"Benar "+score+", salah "+(total-score)+" (soal 7 jawaban bebas)"}), h("small",{text:when?("Dijawab: "+when):""}) ])
+    ]));
+
+    QUESTIONS.forEach(function(q,i){
+      var f=finalFlags[i], isFree=q.type==="free";
+      var badge=isFree?h("span",{class:"badge free",text:"Jawaban bebas"}):h("span",{class:"badge "+(f?"ok":"bad"),text:f?"✔ Benar":"✘ Salah"});
+      var head=h("div",{class:"qhead"},[ h("p",{class:"q"},[(i+1)+". "+q.q,badge]) ]);
+      var item=h("div",{class:"qitem"},[
+        head,
+        h("div",{class:"lbl",text:"Jawaban dia"}), h("p",{class:"ans",text:data.a[i]||"(kosong)"})
+      ]);
+      if(!isFree){
+        item.appendChild(h("div",{class:"lbl",text:"Jawaban benar"}));
+        item.appendChild(h("p",{class:"ans",text:q.correct}));
+        var tg=h("button",{class:"btn ghost small",style:"margin-top:10px",text:"Ubah penilaian jadi "+(f?"Salah":"Benar"),onclick:function(){ overrides[i]=!f; render(); }});
+        item.appendChild(tg);
+      } else {
+        var wc=(data.a[i]||"").trim().split(/\s+/).filter(Boolean).length;
+        item.appendChild(h("div",{class:"lbl",text:"Catatan"}));
+        item.appendChild(h("p",{class:"ans",text:"Penjelasan sebanyak "+wc+" kata. Tidak ada benar/salah untuk soal ini."}));
+      }
+      result.appendChild(item);
+    });
+  }
+
+  var checkBtn=h("button",{class:"btn",text:"Periksa Jawaban 🔍",onclick:function(){ load(codeBox.value); }});
+  var localCode=store("result");
+  var localBtn=localCode?h("button",{class:"btn ghost",text:"Pakai hasil di perangkat ini",onclick:function(){ codeBox.value=localCode; load(localCode); }}):null;
+  var clearBtn=h("button",{class:"btn ghost small",text:"Hapus data lokal",onclick:function(){ store("result",null); screenAdmin(); }});
+
+  show(h("div",{class:"card wide"},[
+    h("p",{class:"script",text:"Panel Admin"}),
+    h("h2",{text:"Cek Jawaban & Skor"}),
+    h("p",{class:"muted",text:"Tempel kode jawaban (atau seluruh pesan WhatsApp dari pasanganmu). Skor dihitung otomatis dan bisa kamu ubah manual."}),
+    codeBox,warn,
+    h("div",{class:"row",style:"justify-content:flex-start"},[checkBtn,localBtn]),
+    h("div",{style:"margin-top:20px"},[result]),
+    h("div",{class:"row",style:"justify-content:space-between;margin-top:24px"},[
+      h("button",{class:"btn ghost small",text:"← Keluar admin",onclick:screenIntro}),
+      localCode?clearBtn:h("span")
+    ])
+  ]));
+  if(initialCode){ codeBox.value=initialCode; load(initialCode); }
+}
+
+document.getElementById("adminBtn").addEventListener("click",screenAdminLogin);
+screenIntro();
+</script>
+</body>
+</html>
